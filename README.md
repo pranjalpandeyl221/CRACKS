@@ -27,7 +27,6 @@ Different defects require different annotations:
 | Image | Mask | Prompt |
 |-------|------|--------|
 | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.jpg` | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.png` | "segment crack" |
-| `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg` | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.png` | "segment joint" |
 
 ![Cracks Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/cracks.png)
 
@@ -61,6 +60,12 @@ Lightweight baseline using CLIP encoders with trainable decoder.
 - **Frozen:** CLIP image + text encoder
 - **Trainable:** Decoder + text projection
 
+**Results:**
+
+| IoU | mIoU | Precision | Recall | F1 | Dice |
+|-----|------|----------|--------|----|----|
+| 0.4554 | 0.4554 | 0.6846 | 0.5763 | 0.6258 | 0.6258 |
+
 ### 2. Advanced SAM-FiLM (Main Model)
 
 FiLM conditioning for text-feature fusion.
@@ -85,7 +90,25 @@ FiLM conditioning for text-feature fusion.
 
 ## Results
 
-### Dataset 1: Cracks
+### Prompt Experiments
+
+**Prompt 1: "segment crack"**
+
+| IoU | mIoU | Precision | Recall | F1 | Dice |
+|-----|------|----------|--------|----|----|
+| 0.4457 | 0.6988 | 0.5096 | 0.7805 | 0.6166 | 0.6166 |
+
+**Prompt 2: "segment wall crack"**
+
+| IoU | mIoU | Precision | Recall | F1 | Dice |
+|-----|------|----------|--------|----|----|
+| 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 0.6290 |
+
+![Prompt Comparison](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_srk/p1_p2.png)
+
+---
+
+### Dataset 1: Cracks (SAM-FiLM)
 
 | Metric | Value |
 |--------|-------|
@@ -114,8 +137,6 @@ FiLM conditioning for text-feature fusion.
 | Precision | 0.3885 | 0.3362 |
 | Recall | 0.9318 | 0.8947 |
 | F1 | 0.5338 | 0.4696 |
-
-![Drywall Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dlv.png)
 
 ![Drywall Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_result.png)
 
