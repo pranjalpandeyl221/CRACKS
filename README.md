@@ -49,7 +49,7 @@ This project addresses **Drywall QA** (Quality Assurance) using text-conditioned
 | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg` | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.png` | "segment crack" |
 | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.jpg` | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.png` | "segment tape" |
 
-
+![Cracks Dataset Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg)
 ![Cracks Dataset Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/cracks_visualization.png)
 
 **Preprocessing Steps:**
