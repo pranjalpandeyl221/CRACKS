@@ -47,6 +47,7 @@ Different defects need different prompts:
 ### 1. CLIPSeg (Baseline)
 
 CLIP encoders + trainable decoder.
+JUST TO GET REFERENCE RESULTS..
 
 - **Frozen:** CLIP image + text encoder
 - **Trainable:** Decoder + text projection
@@ -114,7 +115,7 @@ FiLM conditioning for text-feature fusion.
 |-----|------|----------|--------|----|----|
 | 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 0.6290 |
 
-![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_srk/p1_p2.png)
+![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/blob/main/im_crk/p1_p2.png)
 
 ---
 
@@ -164,10 +165,7 @@ wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
 
 ## Training
 
-```bash
-jupyter notebook train_cracks_segmentation.ipynb
-jupyter notebook train_drywall_segmentation.ipynb
-```
+Note books are given accordingly
 
 **Config:** batch=4, epochs=20, lr=1e-4, num_workers=4
 
