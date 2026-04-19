@@ -42,6 +42,16 @@ This project addresses **Drywall QA** (Quality Assurance) using text-conditioned
 - 8,511 annotations (polygons)
 - 2 categories: crack, NewCracks
 
+**Sample from Original Dataset:**
+
+| Image | Mask | Prompt |
+|-------|------|--------|
+| `00021_jpg.rf.S0P7SnzwPx0s4z4ldWvu.jpg` | `00021_jpg.rf.S0P7SnzwPx0s4z4ldWvu.png` | "segment crack" |
+| `00028_jpg.rf.WIWJghqsuUyyDgujVwNb.jpg` | `00028_jpg.rf.WIWJghqsuUyyDgujVwNb.png` | "segment wall crack" |
+| `1065-dat_png_jpg.rf.NPbxq9RlzpljbRiU8J4I.jpg` | `1065-dat_png_jpg.rf.NPbxq9RlzpljbRiU8J4I.png` | "segment crack" |
+
+![Cracks Dataset Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/cracks_visualization.png)
+
 **Preprocessing Steps:**
 
 1. **Extract ZIP** → COCO annotations + images
@@ -70,6 +80,14 @@ This project addresses **Drywall QA** (Quality Assurance) using text-conditioned
 **Original Data:**
 - 1,022 images
 - 1,424 annotations (bbox, NO polygons)
+
+**Sample from Original Dataset:**
+
+| Image | Mask | Prompt |
+|-------|------|--------|
+| `2000x1500_46_resized_jpg.rf.PrVgoG5ug1wBk53ehTDi.jpg` | `2000x1500_46_resized_jpg.rf.PrVgoG5ug1wBk53ehTDi.png` | "segment taping area" |
+| `IMG_20220627_110122-jpg_1500x2000_jpg.rf.6xOiyE2EhMUtNR6J1A7C.jpg` | `IMG_20220627_110122-jpg_1500x2000_jpg.rf.6xOiyE2EhMUtNR6J1A7C.png` | "segment joint/tape" |
+| `IMG_8205_JPG_jpg.rf.tFAjesep4ZdwmACgBRFq.jpg` | `IMG_8205_JPG_jpg.rf.tFAjesep4ZdwmACgBRFq.png` | "segment drywall seam" |
 
 **Preprocessing Steps:**
 
