@@ -2,9 +2,9 @@
 
 ## Problem
 
-Automatic quality inspection of drywall surfaces using deep learning. The model takes an image + text prompt (e.g., "segment crack", "segment taping area") and produces binary segmentation masks for defects.
+Automatic quality inspection of drywall surfaces using deep learning. Model takes image + text prompt (e.g., "segment crack", "segment taping area") → outputs binary segmentation masks.
 
-Different defects require different annotations:
+Different defects need different prompts:
 - Cracks → "segment crack"
 - Taping areas → "segment taping area"
 - Joints → "segment joint/tape"
@@ -16,23 +16,16 @@ Different defects require different annotations:
 
 ### 1. Cracks Dataset (Dataset 2)
 
-**Source:** `cracks.coco.zip` (COCO format with polygon segmentations)
+**Source:** `cracks.coco.zip` (COCO with polygons)
 
 - 5,369 images (640x640)
-- 8,511 annotations (polygons)
-- 2 categories: crack, NewCracks
+- 8,511 annotations
 
-**Sample Data:**
+**Sample:** `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.jpg` → "segment crack"
 
-| Image | Mask | Prompt |
-|-------|------|--------|
-| `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.jpg` | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.png` | "segment crack" |
-
-![Cracks Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/cracks.png)
+![Cracks Viz](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/cracks.png)
 
 **Split:** Train 3,758 | Val 805 | Test 806
-
-**Prompts:** "segment crack", "segment wall crack"
 
 ---
 
@@ -43,11 +36,9 @@ Different defects require different annotations:
 - 1,022 images
 - 1,424 annotations
 
-![Drywall Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dlv.png)
+![Drywall Viz](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dlv.png)
 
 **Split:** Train 715 | Val 153 | Test 154
-
-**Prompts:** "segment taping area", "segment joint/tape", "segment drywall seam"
 
 ---
 
@@ -55,16 +46,18 @@ Different defects require different annotations:
 
 ### 1. CLIPSeg (Baseline)
 
-Lightweight baseline using CLIP encoders with trainable decoder.
+CLIP encoders + trainable decoder.
 
 - **Frozen:** CLIP image + text encoder
 - **Trainable:** Decoder + text projection
 
 **Results:**
 
-|  mIoU | Precision | Recall | F1 | Dice |
-|------|----------|--------|----|----|
+| IoU | Precision | Recall | F1 | Dice |
+|-----|----------|--------|----|----|
 | 0.4554 | 0.6846 | 0.5763 | 0.6258 | 0.6258 |
+
+---
 
 ### 2. Advanced SAM-FiLM (Main Model)
 
@@ -81,53 +74,51 @@ FiLM conditioning for text-feature fusion.
 
 **Training:** FiLM Generator + Decoder (trainable), Encoders (frozen)
 
-**Model Stats:**
-- Parameters: 87.59 M
-- FLOPs: 149.93 G
-- Inference Time: 64.30 ms
+**Stats:** Params: 87.59 M | FLOPs: 149.93 G | Inference: 64.30 ms
 
 ---
 
 ## Results
 
-### Prompt Experiments
+### 1. Dataset 2: Cracks (SAM-FiLM)
 
-**Prompt 1: "segment crack"**
+| IoU | mIoU | Precision | Recall | F1 | Dice |
+|-----|------|----------|--------|----|----|
+| 0.5012 | 0.7330 | 0.6230 | 0.7195 | 0.6678 | 0.6678 |
+
+![Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r1.png)
+
+![Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r2.png)
+
+![Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r3.png)
+
+### Failure Cases
+
+![Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/failure_case.png)
+
+**Shown above:** Cases where model predicted poorly (IoU < 0.3). Main issues: small thin cracks, low contrast areas, overlapping annotations.
+
+---
+
+### 2. Prompt Experiments
+
+**"segment crack":**
 
 | IoU | mIoU | Precision | Recall | F1 | Dice |
 |-----|------|----------|--------|----|----|
 | 0.4457 | 0.6988 | 0.5096 | 0.7805 | 0.6166 | 0.6166 |
 
-**Prompt 2: "segment wall crack"**
+**"segment wall crack":**
 
 | IoU | mIoU | Precision | Recall | F1 | Dice |
 |-----|------|----------|--------|----|----|
 | 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 0.6290 |
 
-![Prompt Comparison](https://github.com/pranjalpandeyl221/CRACKS/blob/main/im_crk/p1_p2.png)
+![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_srk/p1_p2.png)
 
 ---
 
-### Dataset 1: Cracks (SAM-FiLM)
-
-| Metric | Value |
-|--------|-------|
-| IoU | 0.5012 |
-| mIoU | 0.7330 |
-| Precision | 0.6230 |
-| Recall | 0.7195 |
-| F1 | 0.6678 |
-| Dice | 0.6678 |
-
-![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r1.png)
-![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r2.png)
-![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r3.png)
-
-![Crack Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/failure_case.png)
-
----
-
-### Dataset 2: Drywall
+### 3. Dataset 1: Drywall
 
 | Metric | Test | Val |
 |--------|------|-----|
@@ -154,8 +145,8 @@ FiLM conditioning for text-feature fusion.
 | mIoU | Mean IoU (foreground + background) |
 | Precision | Per-class mean precision |
 | Recall | Per-class mean recall |
-| F1 | Per-class mean F1 score |
-| Dice | Dice coefficient (foreground) |
+| F1 | Per-class mean F1 |
+| Dice | Dice coefficient |
 
 ---
 
@@ -179,19 +170,6 @@ jupyter notebook train_drywall_segmentation.ipynb
 ```
 
 **Config:** batch=4, epochs=20, lr=1e-4, num_workers=4
-
----
-
-## Project Structure
-
-```
-.
-├── train_cracks_segmentation.ipynb
-├── train_drywall_segmentation.ipynb
-├── cracks_dataset_v2/
-├── drywall_dataset_v2/
-└── README.md
-```
 
 ---
 
