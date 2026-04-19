@@ -17,17 +17,35 @@ This project addresses **Drywall QA** (Quality Assurance) using text-conditioned
 
 ---
 
-## Project Structure
+## Results (Cracks Dataset)
 
-```
-.
-├── train_cracks_segmentation.ipynb    # CLIPSeg baseline for cracks
-├── train_drywall_segmentation.ipynb # Advanced SAM-FiLM for drywall
-├── cracks_dataset_v2/              # Processed cracks dataset
-├── drywall_dataset_v2/              # Processed drywall dataset
-├── PRE_PROCESS.md                   # Data preprocessing details
-└── README.md                       # This file
-```
+### Test Metrics
+
+| Metric | Value |
+|--------|-------|
+| **Test IoU (Crack Only)** | 0.5012 |
+| **Test mIoU (Crack + BG)** | 0.7330 |
+| **Precision** | 0.6230 |
+| **Recall** | 0.7195 |
+| **F1 Score** | 0.6678 |
+| **Dice** | 0.6678 |
+
+### Visual Results
+
+![Results 1](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r1.png)
+
+![Results 2](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r2.png)
+
+![Results 3](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r3.png)
+
+### Failure Cases
+
+![Failure Cases](https://github.com/pranjalpandeyl221/CRACKS/raw/main/failure_case.png)
+
+**Failure Analysis:**
+- Small thin cracks often missed
+- Low contrast cracks in shadowed areas
+- Overlapping annotations in training data
 
 ---
 
@@ -50,15 +68,6 @@ This project addresses **Drywall QA** (Quality Assurance) using text-conditioned
 | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg` | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.png` | "segment joint" |
 
 ![Cracks Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/cracks.png)
-
-**Preprocessing Steps:**
-
-1. **Extract ZIP** → COCO annotations + images
-2. **Analyze COCO JSON** to understand structure
-3. **Create Train/Val/Test Split** (70/15/15, SEED=42)
-4. **Convert Polygons to Masks** using cv2.fillPoly()
-5. **Fix Filename Alignment** - mask filenames now match image filenames
-6. **Export** to train/val/test folders
 
 **Split Statistics:**
 
@@ -122,6 +131,11 @@ More powerful architecture with FiLM conditioning for better text-feature fusion
 - Decoder: trainable
 - Encoders: frozen
 
+**Model Stats:**
+- Parameters: 87.59 M
+- FLOPs: 149.93 G
+- Inference Time: 64.30 ms
+
 ---
 
 ## Metrics
@@ -175,41 +189,17 @@ jupyter notebook train_drywall_segmentation.ipynb
 
 ---
 
-## Results (Cracks Dataset)
+## Project Structure
 
-### Test Metrics
-
-| Metric | Value |
-|--------|-------|
-| **Test IoU (Crack Only)** | 0.5012 |
-| **Test mIoU (Crack + BG)** | 0.7330 |
-| **Precision** | 0.6230 |
-| **Recall** | 0.7195 |
-| **F1 Score** | 0.6678 |
-| **Dice** | 0.6678 |
-
-### Visual Results
-
-![Results 1](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r1.png)
-
-![Results 2](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r2.png)
-
-![Results 3](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r3.png)
-
-### Failure Cases
-
-![Failure Cases](https://github.com/pranjalpandeyl221/CRACKS/raw/main/failure_case.png)
-
-**Analysis of cases with IoU < 0.3:**
-
-1. **Small thin cracks often missed** - Model struggles with fine hairline cracks that are less than 5 pixels wide
-2. **Low contrast cracks in shadowed areas** - Cracks in dark regions with poor visibility
-3. **Overlapping annotations** - Some training images have multiple overlapping crack annotations causing confusion
-
-**Recommendations for improvement:**
-- Data augmentation with random brightness/contrast
-- Add more small crack examples to training set
-- Use test-time augmentation (TTA)
+```
+.
+├── train_cracks_segmentation.ipynb    # CLIPSeg baseline for cracks
+├── train_drywall_segmentation.ipynb # Advanced SAM-FiLM for drywall
+├── cracks_dataset_v2/              # Processed cracks dataset
+├── drywall_dataset_v2/              # Processed drywall dataset
+├── PRE_PROCESS.md                   # Data preprocessing details
+└── README.md                       # This file
+```
 
 ---
 
