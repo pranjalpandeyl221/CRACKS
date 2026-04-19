@@ -62,9 +62,9 @@ Lightweight baseline using CLIP encoders with trainable decoder.
 
 **Results:**
 
-| IoU | mIoU | Precision | Recall | F1 | Dice |
-|-----|------|----------|--------|----|----|
-| 0.4554 | 0.4554 | 0.6846 | 0.5763 | 0.6258 | 0.6258 |
+|  mIoU | Precision | Recall | F1 | Dice |
+|------|----------|--------|----|----|
+| 0.4554 | 0.6846 | 0.5763 | 0.6258 | 0.6258 |
 
 ### 2. Advanced SAM-FiLM (Main Model)
 
