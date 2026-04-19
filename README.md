@@ -198,10 +198,18 @@ jupyter notebook train_drywall_segmentation.ipynb
 
 ### Failure Cases
 
-Analysis of cases with IoU < 0.3:
-- Small thin cracks often missed
-- Low contrast cracks in shadowed areas
-- Overlapping annotations in training data
+![Failure Cases](https://github.com/pranjalpandeyl221/CRACKS/raw/main/failure_case.png)
+
+**Analysis of cases with IoU < 0.3:**
+
+1. **Small thin cracks often missed** - Model struggles with fine hairline cracks that are less than 5 pixels wide
+2. **Low contrast cracks in shadowed areas** - Cracks in dark regions with poor visibility
+3. **Overlapping annotations** - Some training images have multiple overlapping crack annotations causing confusion
+
+**Recommendations for improvement:**
+- Data augmentation with random brightness/contrast
+- Add more small crack examples to training set
+- Use test-time augmentation (TTA)
 
 ---
 
