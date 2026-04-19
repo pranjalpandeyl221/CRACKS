@@ -29,7 +29,7 @@ Different defects require different annotations:
 | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.jpg` | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.png` | "segment crack" |
 | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg` | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.png` | "segment joint" |
 
-![Cracks Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/cracks.png)
+![Cracks Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/cracks.png)
 
 **Split:** Train 3,758 | Val 805 | Test 806
 
@@ -63,7 +63,7 @@ Lightweight baseline using CLIP encoders with trainable decoder.
 
 FiLM conditioning for text-feature fusion.
 
-![Architecture](https://github.com/pranjalpandeyl221/CRACKS/raw/main/architecture.png)
+![Architecture](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/architecture.png)
 
 **Components:**
 - Image Encoder: SAM ViT-B (frozen) → 256-d
@@ -94,11 +94,11 @@ FiLM conditioning for text-feature fusion.
 | F1 | 0.6678 |
 | Dice | 0.6678 |
 
-![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r1.png)
-![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r2.png)
-![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r3.png)
+![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r1.png)
+![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r2.png)
+![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r3.png)
 
-![Crack Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/failure_case.png)
+![Crack Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/failure_case.png)
 
 ---
 
@@ -113,13 +113,13 @@ FiLM conditioning for text-feature fusion.
 | Recall | 0.9318 | 0.8947 |
 | F1 | 0.5338 | 0.4696 |
 
-![Drywall Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/d1v.png)
+![Drywall Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dlv.png)
 
-![Drywall Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/dataset1_result.png)
+![Drywall Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_result.png)
 
-![Drywall Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/dataset1_failure_case.png)
+![Drywall Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_failure_case.png)
 
-![Training Curve](https://github.com/pranjalpandeyl221/CRACKS/raw/main/dataset1_training_curve.png)
+![Training Curve](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_training_curve.png)
 
 ---
 
