@@ -44,6 +44,8 @@ Different defects require different annotations:
 - 1,022 images
 - 1,424 annotations
 
+![Drywall Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dlv.png)
+
 **Split:** Train 715 | Val 153 | Test 154
 
 **Prompts:** "segment taping area", "segment joint/tape", "segment drywall seam"
