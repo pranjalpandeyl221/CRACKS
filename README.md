@@ -42,15 +42,14 @@ This project addresses **Drywall QA** (Quality Assurance) using text-conditioned
 - 8,511 annotations (polygons)
 - 2 categories: crack, NewCracks
 
-**Sample from Original Dataset:**
+**Sample Data:**
 
 | Image | Mask | Prompt |
 |-------|------|--------|
-| `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg` | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.png` | "segment crack" |
-| `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.jpg` | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.png` | "segment tape" |
+| `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.jpg` | `2000x1500_5_resized_jpg.rf.0zMYivYn1ttmm5nyO0aE.png` | "segment crack" |
+| `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg` | `1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.png` | "segment joint" |
 
-![Cracks Dataset Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/1_0005_2-Vertical-cracks_png_jpg.rf.6Bv2WLv15XAJ4dJZ1lXy.jpg)
-![Cracks Dataset Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/cracks_visualization.png)
+![Cracks Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/cracks.png)
 
 **Preprocessing Steps:**
 
@@ -81,21 +80,6 @@ This project addresses **Drywall QA** (Quality Assurance) using text-conditioned
 - 1,022 images
 - 1,424 annotations (bbox, NO polygons)
 
-**Sample from Original Dataset:**
-
-| Image | Mask | Prompt |
-|-------|------|--------|
-| `2000x1500_46_resized_jpg.rf.PrVgoG5ug1wBk53ehTDi.jpg` | `2000x1500_46_resized_jpg.rf.PrVgoG5ug1wBk53ehTDi.png` | "segment taping area" |
-| `IMG_20220627_110122-jpg_1500x2000_jpg.rf.6xOiyE2EhMUtNR6J1A7C.jpg` | `IMG_20220627_110122-jpg_1500x2000_jpg.rf.6xOiyE2EhMUtNR6J1A7C.png` | "segment joint/tape" |
-| `IMG_8205_JPG_jpg.rf.tFAjesep4ZdwmACgBRFq.jpg` | `IMG_8205_JPG_jpg.rf.tFAjesep4ZdwmACgBRFq.png` | "segment drywall seam" |
-
-**Preprocessing Steps:**
-
-1. **Extract ZIP** → COCO annotations + images
-2. **Convert BBOX to Rectangular Masks** - Since no polygons, convert bounding boxes to rectangle masks
-3. **Create Train/Val/Test Split** (70/15/15, SEED=42)
-4. **Export** to train/val/test folders
-
 **Split Statistics:**
 
 | Split  | Count |
@@ -122,9 +106,21 @@ A lightweight baseline using CLIP's image/text encoders with a trainable decoder
 
 More powerful architecture with FiLM conditioning for better text-feature fusion.
 
-- **FiLM Generator:** MLP that maps text → gamma/beta parameters
-- **Dilated Decoder:** Multi-scale features with different dilation rates
-- **Edge-Aware Head:** Incorporates edge detection for boundary accuracy
+![Architecture](https://github.com/pranjalpandeyl221/CRACKS/raw/main/architecture.png)
+
+**Components:**
+
+- **Image Encoder:** SAM ViT-B (frozen) → 256-d feature maps
+- **Text Encoder:** CLIP (frozen) → 512-d text embeddings  
+- **FiLM Generator:** MLP(512→256) → generates gamma/beta for feature modulation
+- **Dilated Decoder:** 4 parallel branches (dilation 1,3,6,12) for multi-scale context
+- **Edge-Aware Head:** Laplacian edge detection + channel attention for boundary accuracy
+- **Output:** Binary segmentation mask (1 channel)
+
+**Training:**
+- FiLM Generator: trainable
+- Decoder: trainable
+- Encoders: frozen
 
 ---
 
@@ -179,13 +175,33 @@ jupyter notebook train_drywall_segmentation.ipynb
 
 ---
 
-## Results
+## Results (Cracks Dataset)
 
-Training produces:
-- Training curves (loss, mIoU, Dice)
-- Test evaluation metrics
-- Visualization of predictions
-- Failure case analysis
+### Test Metrics
+
+| Metric | Value |
+|--------|-------|
+| **Test IoU (Crack Only)** | 0.5012 |
+| **Test mIoU (Crack + BG)** | 0.7330 |
+| **Precision** | 0.6230 |
+| **Recall** | 0.7195 |
+| **F1 Score** | 0.6678 |
+| **Dice** | 0.6678 |
+
+### Visual Results
+
+![Results 1](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r1.png)
+
+![Results 2](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r2.png)
+
+![Results 3](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r3.png)
+
+### Failure Cases
+
+Analysis of cases with IoU < 0.3:
+- Small thin cracks often missed
+- Low contrast cracks in shadowed areas
+- Overlapping annotations in training data
 
 ---
 
