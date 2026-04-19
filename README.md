@@ -104,7 +104,7 @@ FiLM conditioning for text-feature fusion.
 |-----|------|----------|--------|----|----|
 | 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 0.6290 |
 
-![Prompt Comparison](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_srk/p1_p2.png)
+![Prompt Comparison](https://github.com/pranjalpandeyl221/CRACKS/blob/main/im_crk/p1_p2.png)
 
 ---
 
