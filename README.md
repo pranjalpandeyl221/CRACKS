@@ -81,35 +81,45 @@ FiLM conditioning for text-feature fusion.
 
 ---
 
-## Results (Cracks Dataset)
+## Results
 
-### Test Metrics
+### Dataset 1: Cracks
 
 | Metric | Value |
 |--------|-------|
-| Test IoU (Crack Only) | 0.5012 |
-| Test mIoU (Crack + BG) | 0.7330 |
+| IoU | 0.5012 |
+| mIoU | 0.7330 |
 | Precision | 0.6230 |
 | Recall | 0.7195 |
-| F1 Score | 0.6678 |
+| F1 | 0.6678 |
 | Dice | 0.6678 |
 
-### Visual Results
+![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r1.png)
+![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r2.png)
+![Crack Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r3.png)
 
-![Results 1](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r1.png)
+![Crack Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/failure_case.png)
 
-![Results 2](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r2.png)
+---
 
-![Results 3](https://github.com/pranjalpandeyl221/CRACKS/raw/main/r3.png)
+### Dataset 2: Drywall
 
-### Failure Cases
+| Metric | Test | Val |
+|--------|------|-----|
+| Loss | 2.2028 | 2.7489 |
+| IoU | 0.3755 | 0.3206 |
+| mIoU | 0.5441 | 0.4762 |
+| Precision | 0.3885 | 0.3362 |
+| Recall | 0.9318 | 0.8947 |
+| F1 | 0.5338 | 0.4696 |
 
-![Failure Cases](https://github.com/pranjalpandeyl221/CRACKS/raw/main/failure_case.png)
+![Drywall Visualization](https://github.com/pranjalpandeyl221/CRACKS/raw/main/d1v.png)
 
-**Failure Analysis:**
-- Small thin cracks often missed
-- Low contrast cracks in shadowed areas
-- Overlapping annotations in training data
+![Drywall Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/dataset1_result.png)
+
+![Drywall Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/dataset1_failure_case.png)
+
+![Training Curve](https://github.com/pranjalpandeyl221/CRACKS/raw/main/dataset1_training_curve.png)
 
 ---
 
