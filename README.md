@@ -102,7 +102,6 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 |-----|------|----------|--------|----|
 | 0.5012 | 0.7330 | 0.6230 | 0.7195 | 0.6678 |
 ---
-THE RESULTS CAN FAIRLY BE IMPROVED USING SKIP CONNECTION OR ATTENTIONS GATES. BUT I CHOOSE TO KEEP THEM AS IT IS SO ARCHITECTURE FAILURE CASES CAN FAIRLY BE PERCEIVED AND DISCUSSED IN FUTURE INTERACTION
 
 ![Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r1.png)
 
@@ -111,7 +110,7 @@ THE RESULTS CAN FAIRLY BE IMPROVED USING SKIP CONNECTION OR ATTENTIONS GATES. BU
 ![Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r3.png)
 
 ### Failure Cases
-THE RESULTS CAN FAIRLY BE IMPROVED USING SKIP CONNECTION OR ATTENTIONS GATES. BUT I CHOOSE TO KEEP THEM AS IT IS SO ARCHITECTURE FAILURE CASES CAN BE PERCEIVED AND DISCUSSED IN FUTURE INTERACTION
+
 ![Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/failure_case.png)
 
 ---
@@ -147,7 +146,7 @@ THE RESULTS CAN FAIRLY BE IMPROVED USING SKIP CONNECTION OR ATTENTIONS GATES. BU
 
 ![Drywall Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_result.png)
 **FAILURE CASE** / improper segmentation
-
+THE RESULTS CAN FAIRLY BE IMPROVED USING SKIP CONNECTION OR ATTENTIONS GATES. BUT I CHOOSE TO KEEP THEM AS IT IS SO ARCHITECTURE FAILURE CASES CAN FAIRLY BE PERCEIVED AND DISCUSSED IN FUTURE INTERACTION. 
 ![Drywall Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_failure_case.png)
 **Reason:**
 - SAM encoder outputs 14×14 feature map → 16× upscale = very coarse resolution
