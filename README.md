@@ -53,10 +53,10 @@ CLIP encoders + trainable decoder.
 
 **Results:**
 
-| IoU | Precision | Recall | F1 | Dice |
-|-----|----------|--------|----|----|
-| 0.4554 | 0.6846 | 0.5763 | 0.6258 | 0.6258 |
-F1 AND DICE HAVE SAME FORMULA
+| IoU | Precision | Recall | F1 |
+|-----|----------|--------|----|
+| 0.4554 | 0.6846 | 0.5763 | 0.6258 | 
+        
 ---
 
 ### 2. Advanced SAM-FiLM (Main Model)
@@ -98,9 +98,10 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 
 ### 1. Dataset 2: Cracks (SAM-FiLM)
 
-| IoU | mIoU | Precision | Recall | F1 | Dice |
-|-----|------|----------|--------|----|----|
-| 0.5012 | 0.7330 | 0.6230 | 0.7195 | 0.6678 | 0.6678 |
+| IoU | mIoU | Precision | Recall | F1 |
+|-----|------|----------|--------|----|
+| 0.5012 | 0.7330 | 0.6230 | 0.7195 | 0.6678 |
+THE RESULTS CAN FAIRLY BE IMPROVED USING SKIP CONNECTION OR ATTENTIONS GATES. BUT I CHOSE TO KEEP THEM AS IT IS SO ARCHITECTURE FAILURE CASES CAN FAIRLY BE PERCEIVED AND DISCUSSED IN FUTURE INTERACTION
 
 ![Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/r1.png)
 
@@ -118,15 +119,15 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 
 **"segment crack":**
 
-| IoU | mIoU | Precision | Recall | F1 | Dice |
-|-----|------|----------|--------|----|----|
-| 0.4457 | 0.6988 | 0.5096 | 0.7805 | 0.6166 | 0.6166 |
+| IoU | mIoU | Precision | Recall | F1 | 
+|-----|------|----------|--------|----|
+| 0.4457 | 0.6988 | 0.5096 | 0.7805 | 0.6166 | 
 
 **"segment wall crack":**
 
-| IoU | mIoU | Precision | Recall | F1 | Dice |
-|-----|------|----------|--------|----|----|
-| 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 0.6290 |
+| IoU | mIoU | Precision | Recall | F1 | 
+|-----|------|----------|--------|----|
+| 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 
 
 ![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/blob/main/im_crk/p1_p2.png)
 
@@ -169,7 +170,7 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 | Precision | Per-class mean precision |
 | Recall | Per-class mean recall |
 | F1 | Per-class mean F1 |
-| Dice | Dice coefficient |
+
 
 ---
 
