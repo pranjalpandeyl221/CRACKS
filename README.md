@@ -112,16 +112,6 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 
 ![Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/failure_case.png)
 
-**Reason:**
-- SAM encoder outputs 14×14 feature map → 16× upscale = very coarse resolution
-- Model recovers broad blob, not precise thin crack boundaries
-- Small/crack (missed)
-
-**Suggestions:**
-- Add skip connections from intermediate SAM layers (U-Net style)
-- Use higher resolution encoder feature maps
-- Add more small crack examples in training data
-
 ---
 
 ### 2. Prompt Experiments
@@ -156,6 +146,15 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 ![Drywall Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_result.png)
 
 ![Drywall Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_failure_case.png)
+**Reason:**
+- SAM encoder outputs 14×14 feature map → 16× upscale = very coarse resolution
+- Model recovers broad blob, not precise thin crack boundaries
+- Small/crack (missed)
+
+**Suggestions:**
+- Add skip connections from intermediate SAM layers (U-Net style)
+- Use higher resolution encoder feature maps
+- Add more small crack examples in training data
 
 ![Training Curve](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_training_curve.png)
 
