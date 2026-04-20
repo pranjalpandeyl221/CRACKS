@@ -56,7 +56,7 @@ CLIP encoders + trainable decoder.
 | IoU | Precision | Recall | F1 | Dice |
 |-----|----------|--------|----|----|
 | 0.4554 | 0.6846 | 0.5763 | 0.6258 | 0.6258 |
-
+F1 AND DICE HAVE SAME FORMULA
 ---
 
 ### 2. Advanced SAM-FiLM (Main Model)
