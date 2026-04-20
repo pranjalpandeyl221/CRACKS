@@ -115,7 +115,7 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 **Reason:**
 - SAM encoder outputs 14×14 feature map → 16× upscale = very coarse resolution
 - Model recovers broad blob, not precise thin crack boundaries
-- Small/crack容易被遗漏 (missed)
+- Small/crack (missed)
 
 **Suggestions:**
 - Add skip connections from intermediate SAM layers (U-Net style)
@@ -138,7 +138,7 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 |-----|------|----------|--------|----|----|
 | 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 0.6290 |
 
-![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_srk/p1_p2.png)
+![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/blob/main/im_crk/p1_p2.png)
 
 ---
 
