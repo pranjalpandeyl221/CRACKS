@@ -144,7 +144,7 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 | F1 | 0.5338 | 0.4696 |
 
 ![Drywall Results](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_result.png)
-
+**FAILURE CASE** / improper segmentation
 ![Drywall Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/dataset1_failure_case.png)
 **Reason:**
 - SAM encoder outputs 14×14 feature map → 16× upscale = very coarse resolution
