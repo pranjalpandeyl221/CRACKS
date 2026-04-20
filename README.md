@@ -47,7 +47,6 @@ Different defects need different prompts:
 ### 1. CLIPSeg (Baseline)
 
 CLIP encoders + trainable decoder.
-JUST TO GET REFERENCE RESULTS..
 
 - **Frozen:** CLIP image + text encoder
 - **Trainable:** Decoder + text projection
@@ -62,18 +61,34 @@ JUST TO GET REFERENCE RESULTS..
 
 ### 2. Advanced SAM-FiLM (Main Model)
 
-FiLM conditioning for text-feature fusion.
+**Methodology:**
 
-![Architecture](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/architecture.png)
+A text-conditioned segmentation model using FiLM (Feature-wise Linear Modulation) to inject text prompts into image features.
+
+**Architecture:**
+
+```
+Input Image → SAM Encoder → 256-d features → FiLM Modulation → Dilated Decoder → Edge Head → Output
+Input Text  → CLIP Encoder → 512-d → FiLM Generator ─────────────────────────↑
+```
 
 **Components:**
-- Image Encoder: SAM ViT-B (frozen) → 256-d
-- Text Encoder: CLIP (frozen) → 512-d
-- FiLM Generator: MLP(512→256) → gamma/beta
-- Dilated Decoder: 4 branches (dilation 1,3,6,12)
-- Edge-Aware Head: Laplacian + channel attention
 
-**Training:** FiLM Generator + Decoder (trainable), Encoders (frozen)
+1. **Image Encoder (SAM ViT-B)** - Frozen backbone that extracts 256-d features from input image. Provides semantic understanding of wall surfaces.
+
+2. **Text Encoder (CLIP)** - Frozen encoder that converts text prompts ("segment crack") into 512-d embeddings. Enables zero-shot segmentation capability.
+
+3. **FiLM Generator (MLP)** - Three-layer MLP that transforms text embeddings into gamma/beta parameters. These scale and shift the image features for text-conditioned output.
+
+4. **Dilated Decoder** - Four parallel branches with dilation rates (1, 3, 6, 12) to capture multi-scale context. Each branch learns features at different receptive fields.
+
+5. **Edge-Aware Head** - Uses Laplacian kernel for edge detection + channel attention. Helps recover precise crack boundaries.
+
+6. **Output** - Binary segmentation mask (1 channel, sigmoid).
+
+**Training:**
+- FiLM Generator + Decoder: trainable
+- Encoders: frozen
 
 **Stats:** Params: 87.59 M | FLOPs: 149.93 G | Inference: 64.30 ms
 
@@ -97,7 +112,15 @@ FiLM conditioning for text-feature fusion.
 
 ![Failure](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/failure_case.png)
 
-**Shown above:** Cases where model predicted poorly (IoU < 0.3). Main issues: small thin cracks, low contrast areas, overlapping annotations.
+**Reason:**
+- SAM encoder outputs 14×14 feature map → 16× upscale = very coarse resolution
+- Model recovers broad blob, not precise thin crack boundaries
+- Small/crack容易被遗漏 (missed)
+
+**Suggestions:**
+- Add skip connections from intermediate SAM layers (U-Net style)
+- Use higher resolution encoder feature maps
+- Add more small crack examples in training data
 
 ---
 
@@ -115,7 +138,7 @@ FiLM conditioning for text-feature fusion.
 |-----|------|----------|--------|----|----|
 | 0.4587 | 0.7084 | 0.5584 | 0.7199 | 0.6290 | 0.6290 |
 
-![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/blob/main/im_crk/p1_p2.png)
+![Prompt Exp](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_srk/p1_p2.png)
 
 ---
 
@@ -165,7 +188,10 @@ wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
 
 ## Training
 
-Note books are given accordingly
+```bash
+jupyter notebook train_cracks_segmentation.ipynb
+jupyter notebook train_drywall_segmentation.ipynb
+```
 
 **Config:** batch=4, epochs=20, lr=1e-4, num_workers=4
 
