@@ -89,7 +89,7 @@ Input Text  → CLIP Encoder → 512-d → FiLM Generator ───────�
 **Training:**
 - FiLM Generator + Decoder: trainable
 - Encoders: frozen
-
+![ARCHITECTURE](https://github.com/pranjalpandeyl221/CRACKS/raw/main/im_crk/architecture.png)
 **Stats:** Params: 87.59 M | FLOPs: 149.93 G | Inference: 64.30 ms
 
 ---
